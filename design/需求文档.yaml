@@ -46,7 +46,7 @@ SORA:
           TASK_PARAM: 对接参数储存
           RESULT_RESPONSE: 返回结果储存
           RECEIVE_NAME: 接收时名称
-          RECEIVE_ADDR: 接收时账号
+          RECEIVE_NUM: 接收时账号
           RECEIVE_TITLE: 接收时标题
           RECEIVE_CONTENT: 接收时内容
           RECEIVE_RESPONSE_PARAM: 接收时响应处理 # 响应处理属于有用的参数，一般如 WhatsApp 类似的发送类型会用到
@@ -64,11 +64,12 @@ SORA:
         Contact:
           TRUE_NAME: 真实姓名
           COUNTRY: 国家
+          CITY: 城市
           ADDR: 详细地址
           GENDER: 性别
           BIRTHDAY: 生日
-          TAG: 标签
-          GROUP: 分组
+          TAG_ID: 标签
+          GROUP_ID: 分组
           
       手机号:
         Phone:
