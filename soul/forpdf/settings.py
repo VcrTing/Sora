@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import platform
+
+_TEST = True
+if (platform.system() == 'Linux'):
+  _TEST = False
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -74,12 +79,27 @@ WSGI_APPLICATION = 'forpdf.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+DATA_BASE = 'soul'
+DATABASES = None
+if _TEST:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': DATA_BASE,
+            'HOST': 'localhost',
+            'PORT': 3306,
+            'USER': 'root',
+            'PASSWORD': 'VcrTing.ZT123zlt',
+            'CONN_MAX_AGE': 2000
+        }
+    }
 
 
 # Password validation
@@ -104,9 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -133,7 +153,7 @@ TIME_INTERVAL = 30
 
 NAMESPACE_FLAG = 'flag'
 
-DEFAULT_HTML = '<html><body><style>div { height: 80vh; background: #f1f1f1; border-radius: 12px; padding: 120px 30px; box-sizing: border-box; text-align: center; display: flex; justify-content: center; align-items: center; }</style><div>DATA</div></body></html>'
+DEFAULT_HTML = '<html><body><style>div { height: 80vh; background: #f1f1f1; border-radius: 12px; padding: 120px 30px; box-sizing: border-box; text-align: center; display: flex; justify-content: center; align-items: center; }</style><div>TEST</div></body></html>'
 
 # Cors Header 跨域
 
