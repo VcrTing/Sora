@@ -10,11 +10,12 @@ from forpdf.settings import BACK_ROOT
 
 
 def working():
-    # 总文件夹是否存在
-    if path(BACK_ROOT):
-        os.mkdir(BACK_ROOT)
 
     print('开始执行备份，路径 =', BACK_ROOT)
+    # 总文件夹是否存在
+    if path(BACK_ROOT) is not True:
+        os.mkdir(BACK_ROOT)
+
     # 拉取备份数据
     confs = get_back_conf()
 

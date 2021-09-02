@@ -7,7 +7,7 @@ def _sshpass_cmd(card):
 def create_scp_cmd(user, addr, port, card):
     _cmd = _sshpass_cmd(card)
 
-    _cmd = _cmd + ' scp -P ' + port
+    _cmd = _cmd + ' scp -P ' + str(port)
 
     _cmd = _cmd  + ' ' + user + '@' + addr + ':'
 
