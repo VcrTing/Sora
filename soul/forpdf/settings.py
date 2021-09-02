@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'Appis.web',
+    'Appis.user',
     'Appis.backup',
     'django_apscheduler'
 ]

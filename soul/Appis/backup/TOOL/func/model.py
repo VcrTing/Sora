@@ -9,15 +9,10 @@ from forpdf.settings import BACK_ROOT
 def dir_name(named):
     return named + '_' + str(time_name())
 
-
 def save_path(named, dir):
     sv_path = os.path.join(
         BACK_ROOT,
-        named
-    )
-
-    sv_path = os.path.join(
-        sv_path,
+        named,
         dir
     )
 

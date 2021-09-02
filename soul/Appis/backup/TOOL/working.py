@@ -28,14 +28,13 @@ def working():
                 user = c.user
                 addr = c.addr
                 tg_path = c.file_path
-                is_dir = c.is_dir
 
                 dir = dir_name(named)
                 sv_path = save_path(named, dir)
 
                 print('此次备份路径 =', sv_path)
                 # 拷贝
-                status = scp_file(user, addr, tg_path, sv_path, is_dir)
+                status = scp_file(user, addr, tg_path, sv_path)
 
                 # 删除
                 print('拷贝完成，准备删除 =====>')
