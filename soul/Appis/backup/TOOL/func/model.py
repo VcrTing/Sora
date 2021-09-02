@@ -16,7 +16,7 @@ def save_path(named, dir):
         dir
     )
 
-    if path(sv_path):
+    if path(sv_path) is not True:
         os.makedirs(sv_path)
 
     return sv_path

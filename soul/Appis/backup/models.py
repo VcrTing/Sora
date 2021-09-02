@@ -7,6 +7,7 @@ class BackUpConf(models.Model):
     named = models.CharField(max_length=60, default='crm', verbose_name='私服名称')
     user = models.CharField(max_length=20, default='root', verbose_name='用户')
     addr = models.CharField(max_length=60, default='127.0.0.0:8000', verbose_name='私服地址')
+    port = models.IntegerField(max_length=10, default='22', verbose_name='端口')
 
     salt = models.CharField(max_length=60, default='vcrting', verbose_name='盐')
     card = models.CharField(max_length=120, default='vcrting', verbose_name='通行证')

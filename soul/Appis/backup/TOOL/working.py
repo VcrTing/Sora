@@ -3,7 +3,7 @@ from forpdf.settings import BASE_DIR
 
 from .func.osed import path
 from .func.trash import trash_old
-from .func.scp import scp_file
+from .func.scp import scp_file, create_scp_cmd
 from .func.model import get_back_conf, save_path, dir_name, save_back_result
 
 from forpdf.settings import BACK_ROOT
@@ -27,14 +27,17 @@ def working():
                 named = c.named
                 user = c.user
                 addr = c.addr
+                port = c.port
                 tg_path = c.file_path
 
                 dir = dir_name(named)
                 sv_path = save_path(named, dir)
 
                 print('此次备份路径 =', sv_path)
+
                 # 拷贝
-                status = scp_file(user, addr, tg_path, sv_path)
+                _cmd = create_scp_cmd(user, addr, port, c.card)
+                status = scp_file(_cmd, tg_path, sv_path)
 
                 # 删除
                 print('拷贝完成，准备删除 =====>')
