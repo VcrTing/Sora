@@ -1,4 +1,5 @@
 import os
+from django.db.models import Q
 from Appis.backup.models import BackUpConf, BackUpWork
 
 from .osed import path, time_name
@@ -26,8 +27,8 @@ def save_path(named, dir):
     return sv_path
 
 def get_back_conf():
-    conf = BackUpConf()
-    res = conf.objects.filter(work_status = True)
+    res = BackUpConf.objects.filter(work_status = True)
+    print('检索配置数量 =', len(res))
     if len(res) > 0:
         return res 
     return None
