@@ -30,7 +30,7 @@ SECRET_KEY = 'q@**h6ys9_p=n9ckj7o%%(ng7x3(&#34+(clbjv@d_+*@x2kad'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ '*' ]
 
 
 # Application definition
@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'web',
     'django.contrib.staticfiles',
+    
+    'Appis.web',
+    'Appis.backup',
+    'django_apscheduler'
 ]
 
 MIDDLEWARE = [
@@ -60,7 +63,9 @@ ROOT_URLCONF = 'forpdf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'Template')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,14 +151,27 @@ MEDIA_DIR = 'Media'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_DIR)
 
+# 备份
+
+BACK_ROOT = os.path.join(
+    os.path.dirname( os.path.dirname(BASE_DIR) ),
+    'BACK'
+)
+
+BACK_INTERVAL = 3
+
+BACK_WORK_HOUR = [ 13, 21]
 
 # 后台
 PDF_DIR = 'save'
+
+PDF_FILE_ROOT = os.path.join(BASE_DIR, PDF_DIR)
+
 TIME_INTERVAL = 30
 
 NAMESPACE_FLAG = 'flag'
 
-DEFAULT_HTML = '<html><body><style>div { height: 80vh; background: #f1f1f1; border-radius: 12px; padding: 120px 30px; box-sizing: border-box; text-align: center; display: flex; justify-content: center; align-items: center; }</style><div>TEST</div></body></html>'
+DEFAULT_HTML = '<html><body><style>div { height: 60vh; background: #f1f1f1; border-radius: 12px; padding: 120px 30px; box-sizing: border-box; text-align: center; display: flex; justify-content: center; align-items: center; margin-bottom: 24px; }</style><div>这是默认的PDF模版。</div><div>This is the default PDF template.</div></body></html>'
 
 # Cors Header 跨域
 
@@ -182,3 +200,4 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+

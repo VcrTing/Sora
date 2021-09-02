@@ -18,15 +18,17 @@ from django.urls import path, include, re_path
 from django.conf.urls import static
 from django.views.static import serve
 
-from web.views import WebView, PdfLinkView
+from Appis.web.views import WebView, PdfLinkView, PdfHtmlView
 
 from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pdf_test/', WebView.as_view()),
-    path('pdf_by_link/', PdfLinkView.as_view()),
+    path('pdf/test/', WebView.as_view()),
+    path('pdf/link/', PdfLinkView.as_view()),
+    path('pdf/html_content/', PdfHtmlView.as_view()),
 
+    re_path(r'^file/(?P<path>.*)$',  serve, {'document_root': settings.PDF_FILE_ROOT}),
     re_path(r'^media/(?P<path>.*)$',  serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]
