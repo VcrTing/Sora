@@ -32,8 +32,8 @@ def save_back_result(success, saveing_path, conf):
     w = BackUpWork()
     w.conf = conf
     w.success = success
-    w.work_time = time_name()
-    w.saveing_path = saveing_path
+    w.work_time = str(time_name())
+    w.saveing_path = str(saveing_path)
     print('保存记录，路径 =', saveing_path)
     w.save()
 

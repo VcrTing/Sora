@@ -15,7 +15,7 @@ def create_scp_cmd(user, addr, port, card):
 
 
 def scp_file(_scp, tg_path, sv_path):
-    _scp = _scp + tg_path + ' ' + sv_path
+    _scp = _scp + tg_path + '* ' + sv_path
 
     print('执行拷贝，命令 =', _scp)
     os.system(_scp)
