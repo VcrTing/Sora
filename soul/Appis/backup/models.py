@@ -12,7 +12,7 @@ class BackUpConf(models.Model):
     card = models.CharField(max_length=120, default='vcrting', verbose_name='通行证')
 
     file_path = models.CharField(max_length=120, default='/root/SMSTask', verbose_name='SCP 目标路径')
-    is_dir = models.BooleanField(verbose_name='目标是文件？', default = True)
+    is_dir = models.BooleanField(verbose_name='文件夹？', default = True)
 
     work_status = models.BooleanField(verbose_name='启用状态？', default = True)
 
