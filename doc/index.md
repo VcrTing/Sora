@@ -3,12 +3,15 @@
 上传: git push  
 
 ## 地址
-`git clone https://github.com/VcrTing/Sora.git`
+git clone https://github.com/VcrTing/Sora.git
 
 ## SUPERVISOR
-停止: sudo supervisorctl stop all  
+停止:  
+sudo supervisorctl stop all  
 
 ## 自然启动
-python3 manage.py runserver 0.0.0.0:8001
+python3 ~/Sora/soul/manage.py runserver 0.0.0.0:8001
 
-sshpass -p 'x%T36twnf}%Ad(7y' scp -P 34567 -r root@crm03.svr.up5d.com:/root/Backup/* ./
+
+## SCP 完整路径
+sshpass -p 'password' scp -P 34567 -r root@domain.com:/root/Backup/* ./
