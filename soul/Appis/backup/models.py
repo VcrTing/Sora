@@ -28,7 +28,7 @@ class BackUpConf(models.Model):
         return '配置' + str(self.id)
 
 class BackUpWork(models.Model):
-    work_time = models.DateTimeField(verbose_name='工作時間', default=timezone.now)
+    work_time = models.CharField(verbose_name='工作時間', max_length=60, default='')
     success = models.BooleanField(verbose_name='备份成功？', default = True)
     saveing_path = models.CharField(max_length=120, default='/root/SMSTask', verbose_name='文件的储存路径')
 

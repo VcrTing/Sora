@@ -9,7 +9,7 @@ def create_scp_cmd(user, addr, port, card):
 
     _cmd = _cmd + ' scp -P ' + str(port)
 
-    _cmd = _cmd  + ' ' + user + '@' + addr + ':'
+    _cmd = _cmd  + ' -r ' + user + '@' + addr + ':'
 
     return _cmd
 
