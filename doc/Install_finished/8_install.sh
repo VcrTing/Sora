@@ -3,8 +3,8 @@ echo '======================>'
 echo ''
 echo ''
 echo '执行项目安装'
-python3 ../../Soul/manage.py makemigrations
-python3 ../../Soul/manage.py migrate
+python3 ../../soul/manage.py makemigrations
+python3 ../../soul/manage.py migrate
 echo '数据同步完成'
 echo '...'
 cp ./nginx.http.conf /etc/nginx/conf.d/project.conf
