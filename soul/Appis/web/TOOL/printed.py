@@ -23,9 +23,10 @@ def pdf_print_by_link(request, link):
 def pdf_print_by_html(request, html):
     n = _name(request)
     named = os.path.join( '.', PDF_DIR, n)
-
+    print('named =', named)
     html = _html_content(request, html)
-    
+    print('html =', str(html)[0: 20])
+
     _file(named, html)
     print('HTML 写入成功。')
     _cmd('HTML', named)

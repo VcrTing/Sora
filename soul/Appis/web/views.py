@@ -58,14 +58,14 @@ class PdfHtmlView(View):
 
     def post(self, request):
         print('post进来')
-        return JsonResponse({ 'status': True, 'file': 'GG' }, safe = False)
+        # return JsonResponse({ 'status': True, 'file': 'GG' }, safe = False)
         html = request.POST.get('html', DEFAULT_HTML)
         print('您发来了 Html')
-        # res = pdf_print_by_html(request, html)
+        res = pdf_print_by_html(request, html)
 
         # pdf_trash()
 
-       #  return JsonResponse({ 'status': True, 'file': res }, safe = False)
+        return JsonResponse({ 'status': True, 'file': res }, safe = False)
 
         
 # 定时任务

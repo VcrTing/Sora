@@ -19,6 +19,7 @@ def _name(request):
 
 # 写入文件
 def _file(named, html):
+    print('要写入的文件为 =', (named + '.html'))
     f = open(named + '.html', 'w')
     f.write(html)
     f.close()
