@@ -11,8 +11,15 @@ from PIL import Image
 from .models import User
 
 #
+class VueView(View):
+    def get(self, request):
+        
+        return render(request, 'index.html', {
+            
+        })
+        
 
-class WebView(View):
+class LoginView(View):
     def get(self, request):
         
         return render(request, 'Auth/Login.html', {

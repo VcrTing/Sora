@@ -13,6 +13,7 @@ from .TOOL.trashed import pdf_trash
 
 from forpdf.settings import MEDIA_DIR, BASE_DIR, TIME_INTERVAL, PDF_DIR, DEFAULT_HTML, NAMESPACE_FLAG
 
+
 class WebView(View):
     def get(self, request):
         

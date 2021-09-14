@@ -27,5 +27,6 @@ def pdf_print_by_html(request, html):
     html = _html_content(request, html)
     
     _file(named, html)
+    print('HTML 写入成功。')
     _cmd('HTML', named)
     return _download(n)
