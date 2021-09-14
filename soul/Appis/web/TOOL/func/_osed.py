@@ -14,7 +14,7 @@ def _name(request):
     rd_num = random.choice(range(0, 1000))
     prefix = request.GET.get(NAMESPACE_FLAG, 'default')
 
-    suffix = str(time.time())[2: 6]
+    suffix = str(time.time())[2: 6] + '_PDF'
     return prefix + '_' + tim + '_' + str(rd_num) + '_' + suffix
 
 # 写入文件
