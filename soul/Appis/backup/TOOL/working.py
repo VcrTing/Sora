@@ -23,6 +23,7 @@ def _running_cp(c, sv_path):
     # 拷贝
     _cmd = create_scp_cmd(user, addr, port, pwd)
     status = scp_file(_cmd, tg_path, sv_path)
+    print('拷贝成功！！！')
     # trans = transport(addr, port, user, pwd)
     # status = scp_paramiko(trans, tg_path, sv_path)
 

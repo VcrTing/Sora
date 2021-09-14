@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'Appis.web',
     'Appis.user',
     'Appis.backup',
-    'django_apscheduler'
+    'django_apscheduler',
+
+    'corsheaders', # django-cors-headers
 ]
 
 MIDDLEWARE = [

@@ -20,6 +20,7 @@ def trash_old(named):
             BACK_ROOT,
             named
         )
+        print('执行的删除路径 =', rec)
 
         shutil.rmtree(rec)
     except Exception as e:
