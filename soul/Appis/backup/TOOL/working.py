@@ -46,15 +46,15 @@ def working():
                 
                 named = c.named
 
+                # 删除
+                trash_old(named)
+
                 # 路径
                 dir = dir_name(named)
                 sv_path = save_path(named, dir)
 
                 # 执行
                 status = _running_cp(c, sv_path)
-
-                # 删除
-                trash_old(named)
 
                 # 保存
                 save_back_result(status, sv_path, c)

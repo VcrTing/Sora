@@ -35,5 +35,5 @@ def save_back_result(success, saveing_path, conf):
     w.work_time = str(time_name())
     w.saveing_path = str(saveing_path)
     print('保存记录，路径 =', saveing_path)
-    w.save()
+    # w.save()
 

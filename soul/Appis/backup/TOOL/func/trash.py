@@ -1,5 +1,5 @@
 
-import os
+import os, shutil
 
 from .osed import trash, time_name
 from forpdf.settings import BACK_ROOT, BACK_INTERVAL
@@ -15,15 +15,23 @@ def need_trash(f):
     return False
 
 def trash_old(named):
-    rec = os.path.join(
-        BACK_ROOT,
-        named
-    )
-    rec = os.listdir(rec)
+    try:
+        rec = os.path.join(
+            BACK_ROOT,
+            named
+        )
 
+        shutil.rmtree(rec)
+    except Exception as e:
+        pass
+    
+    """
+    rec = os.listdir(rec)
     for f in rec:
         need = need_trash(f)
 
         if need:
             print('删除文件 =', f)
             trash(f)
+
+    """
