@@ -17,3 +17,14 @@ python3 ~/Sora/soul/manage.py runserver 0.0.0.0:8001
 sshpass -p 'password' scp -P 34567 -r root@domain.com:/root/Backup/* ./
 
 sshpass -p '!d7' scp -P 34567 -r root@crm03.svr.up5d.com:/root/Backup/* /root/BACK_FILES_IMPORTANT/Eye/Eye_2021090311
+
+## 安装 wkhtmltopdf
+### https://wkhtmltopdf.org/downloads.html  
+wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.1.4-2/wkhtmltox-0.12.1.4-2.centos7.x86_64.rpm
+
+yum install -y libXext libjpeg xorg-x11-fonts-75dpi xorg-x11-fonts-Type1
+
+rpm -ivh wkhtmltox-0.12.6-1.centos8.x86_64.rpm
+或者 sudo rpm -ivh --prefix=/opt wkhtmltox-0.12.6-1.centos8.x86_64.rpm
+
+wkhtmltopdf https://www.baidu.com baidu.pdf

@@ -37,5 +37,4 @@ def _files():
 # 删除 文件
 def _trash(f):
     f = os.path.join( BASE_DIR, PDF_DIR, f )
-    print('要删除的 文件 =', f)
-    # os.remove(f)
+    os.remove(f)

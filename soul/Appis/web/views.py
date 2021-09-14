@@ -59,6 +59,7 @@ class PdfHtmlView(View):
     def post(self, request):
 
         html = request.POST.get('html', DEFAULT_HTML)
+        print('您发来了 Html')
         res = pdf_print_by_html(request, html)
 
         pdf_trash()
