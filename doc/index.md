@@ -10,6 +10,8 @@ git clone https://github.com/VcrTing/Sora.git
 sudo supervisorctl stop all  
 
 ## 自然启动
+python3 manage.py runserver 0.0.0.0:8001
+/
 python3 ~/Sora/soul/manage.py runserver 0.0.0.0:8001
 
 
@@ -22,9 +24,18 @@ sshpass -p '!d7' scp -P 34567 -r root@crm03.svr.up5d.com:/root/Backup/* /root/BA
 ### https://wkhtmltopdf.org/downloads.html  
 wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.1.4-2/wkhtmltox-0.12.1.4-2.centos7.x86_64.rpm
 
+rpm -ivh wkhtmltox-0.12.1.4-2.centos7.x86_64.rpm
+或者 sudo rpm -ivh --prefix=/opt wkhtmltox-0.12.1.4-2.centos7.x86_64.rpm
+
 yum install -y libXext libjpeg xorg-x11-fonts-75dpi xorg-x11-fonts-Type1
 
-rpm -ivh wkhtmltox-0.12.6-1.centos8.x86_64.rpm
-或者 sudo rpm -ivh --prefix=/opt wkhtmltox-0.12.6-1.centos8.x86_64.rpm
-
 wkhtmltopdf https://www.baidu.com baidu.pdf
+
+
+## 安装中文字体
+fc-list  :lang=zh
+
+cd /usr/share/fonts
+mkdir chinese
+
+wget http://xz.w10a.com/small/simsun.zip

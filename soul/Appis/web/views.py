@@ -63,8 +63,9 @@ class PdfHtmlView(View):
         print('您发来了 html =', html)
         print(type(html))
         res = pdf_print_by_html(request, html)
-
-        # pdf_trash()
+        
+        print('开始删除')
+        pdf_trash()
 
         return JsonResponse({ 'status': True, 'file': res }, safe = False)
 
