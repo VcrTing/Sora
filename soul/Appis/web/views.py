@@ -107,6 +107,6 @@ sch.add_listener(
     EVENT_JOB_EXECUTED
 )
 
-sch.add_job(fun, 'interval', seconds = (60*2), id = 'sora')
+sch.add_job(fun, 'interval', seconds = (60*5), id = 'sora')
 sch.start()
 print('定时任务加载完毕_____')
