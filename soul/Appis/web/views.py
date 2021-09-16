@@ -8,6 +8,8 @@ from datetime import datetime
 import os, json, uuid, time, random
 from PIL import Image
 
+from xhtml2pdf import pisa
+
 from .TOOL.printed import pdf_print_by_link, pdf_print_by_html
 from .TOOL.trashed import pdf_trash
 
@@ -50,7 +52,7 @@ class PdfLinkView(View):
 
         domain = self.get_domain(request)
         res = domain + '/' + res
-        html = domain + '/' + res[0: -3] + 'html'
+        html = res[0: -3] + 'html'
         
         pdf_trash()
         return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
@@ -72,14 +74,33 @@ class PdfHtmlView(View):
     def post(self, request):
         
         html = request.POST.get('html', 'Nothing')
+        mode = request.POST.get('method', 'sponse')
+
         res = pdf_print_by_html(request, html)
+        html_file = res[0: -3] + 'html'
+
+        if mode == 'sponse':
+
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+            
+            pisa.CreatePDF(html, dest = response)
+            return response
+        else:
+            pisa.CreatePDF(html, res)
+            return JsonResponse({ 'status': True, 'pdf': res, 'html': html_file }, safe = False)
+        """
 
         domain = self.get_domain(request)
         res = domain + '/' + res
-        html = domain + '/' + res[0: -3] + 'html'
+        html = res[0: -3] + 'html'
         
         pdf_trash()
         return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
+        """
+
+
+
 
         
 # 定时任务
