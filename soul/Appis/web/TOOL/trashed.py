@@ -18,11 +18,13 @@ def _need_trash_by_time(rec, _now):
 # 删除 工作
 def pdf_trash():
     _now = _time()
-    fs = _files()
+    try:
+        fs = _files()
 
-    for f in fs:
-        _need = _need_trash_by_time(f, _now)
-        if _need:
-            # 删除
-            _trash(f)
-            
+        for f in fs:
+            _need = _need_trash_by_time(f, _now)
+            if _need:
+                # 删除
+                _trash(f)
+    except Exception as e:
+        pass

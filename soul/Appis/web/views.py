@@ -39,16 +39,19 @@ class PdfLinkView(View):
         
         print('---- PDF LINK GET ----')
         
-        link = request.POST.get('link', None)
-        res = pdf_print_by_link(request, link)
-        pdf_trash()
-        return JsonResponse({ 'status': True, 'file': res }, safe = False)
+        return JsonResponse({ 'status': True, 'file': 'pls use the post method.' }, safe = False)
 
     def post(self, request):
 
         print('---- PDF LINK ----')
 
-        return JsonResponse({ 'status': True }, safe = False)
+        link = request.POST.get('link', None)
+        print('您发来了 html =', link)
+        res = pdf_print_by_link(request, link)
+        
+        print('开始删除')
+        pdf_trash()
+        return JsonResponse({ 'status': True, 'file': res }, safe = False)
 
 class PdfHtmlView(View):
     def get(self, request):
@@ -60,8 +63,6 @@ class PdfHtmlView(View):
         print('post进来')
         # return JsonResponse({ 'status': True, 'file': 'GG' }, safe = False)
         html = request.POST.get('html', '无')
-        print('您发来了 html =', html)
-        print(type(html))
         res = pdf_print_by_html(request, html)
         
         print('开始删除')

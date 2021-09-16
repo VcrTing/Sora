@@ -16,7 +16,7 @@ def pdf_print_by_link(request, link):
 
     link = _html_link(request, link)
 
-    _file(named, link)
+    # _file(named, link)
     _cmd('LINK', named, link)
     return _download(n)
 
