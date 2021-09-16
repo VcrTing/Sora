@@ -1,5 +1,6 @@
 
-import os, json, uuid, time, random
+import os, json, uuid, time, random, requests
+from posixpath import pardir
 from forpdf.settings import MEDIA_DIR, BASE_DIR, TIME_INTERVAL, PDF_DIR, DEFAULT_HTML, NAMESPACE_FLAG
 
 # 自动生成时间
@@ -24,7 +25,18 @@ def _file(named, html):
     f.write(html)
     f.close()
 
-# 下载 文件
+# 下载文件
+def req_html_form_link(link):
+    res = { 'text': '' }
+    try:
+        res = requests.get(link)
+        print('Link 请求成功。。')
+    except Exception as e:
+        pass
+    finally:
+        return res.text
+
+# 提供 文件 下载
 def _download(rec):
     return os.path.join( '', 'file',
         rec + '.pdf'
