@@ -10,7 +10,7 @@ from .func._serial import _html_content, _html_link
 from .func._osed import _name, _file, _download, req_html_form_link
 
 
-def pdf_print_by_link(request, link, static = True):
+def pdf_print_by_link(request, link, static):
     n = _name(request)
     named = os.path.join( '.', PDF_DIR, n)
 

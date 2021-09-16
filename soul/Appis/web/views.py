@@ -16,59 +16,70 @@ from forpdf.settings import MEDIA_DIR, BASE_DIR, TIME_INTERVAL, PDF_DIR, DEFAULT
 
 class WebView(View):
     def get(self, request):
-        
-        print('---- START GET ----')
-        
+        print(request.META['HTTP_HOST'])
         html = request.GET.get('html', DEFAULT_HTML)
         res = pdf_print_by_html(request, html)
+
         pdf_trash()
-        return JsonResponse({ 'status': True, 'file': res }, safe = False)
+        return JsonResponse({ 'status': True, 'pdf': res }, safe = False)
 
     def post(self, request):
-
-        # cm = 'wkhtmltopdf ../save.html save.pdf'
-        # os.system(cm)
-        print('---- START POST ----')
         html = request.POST.get('html', None)
-        print('HTML =', html)
-
         return JsonResponse({ 'status': True }, safe = False)
 
+# 根据 LINK 转为 PDF
 class PdfLinkView(View):
     def get(self, request):
-        
-        print('---- PDF LINK GET ----')
-        
         return JsonResponse({ 'status': True, 'file': 'pls use the post method.' }, safe = False)
 
-    def post(self, request):
+    def get_domain(self, request):
+        host = request.META['HTTP_HOST']
+        head = request.META['wsgi.url_scheme']
+        if head:
+            head = str(head)
+        else:
+            head = 'http'
+        return head + '://' + host
 
-        print('---- PDF LINK ----')
+    def post(self, request):
 
         link = request.POST.get('link', None)
-        print('您发来了 html =', link)
-        res = pdf_print_by_link(request, link)
-        
-        print('开始删除')
-        pdf_trash()
-        return JsonResponse({ 'status': True, 'file': res }, safe = False)
+        is_static = request.POST.get('is_static', False)
 
+        res = pdf_print_by_link(request, link, is_static)
+
+        domain = self.get_domain(request)
+        res = domain + '/' + res
+        html = domain + '/' + res[0: -3] + 'html'
+        
+        pdf_trash()
+        return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
+
+# 根据 HTML 转为 PDF
 class PdfHtmlView(View):
     def get(self, request):
-        print('---- PDF BY HTML CONTENT ----')
+        return JsonResponse({ 'status': True, 'msg': 'pls use the post method.' }, safe = False)
 
-        return JsonResponse({ 'status': True, 'msg': 'Here are pdf render by html content. pls use post method. ' }, safe = False)
+    def get_domain(self, request):
+        host = request.META['HTTP_HOST']
+        head = request.META['wsgi.url_scheme']
+        if head:
+            head = str(head)
+        else:
+            head = 'http'
+        return head + '://' + host
 
     def post(self, request):
-        print('post进来')
-        # return JsonResponse({ 'status': True, 'file': 'GG' }, safe = False)
-        html = request.POST.get('html', '无')
-        res = pdf_print_by_html(request, html)
         
-        print('开始删除')
-        pdf_trash()
+        html = request.POST.get('html', 'Nothing')
+        res = pdf_print_by_html(request, html)
 
-        return JsonResponse({ 'status': True, 'file': res }, safe = False)
+        domain = self.get_domain(request)
+        res = domain + '/' + res
+        html = domain + '/' + res[0: -3] + 'html'
+        
+        pdf_trash()
+        return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
 
         
 # 定时任务
