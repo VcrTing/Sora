@@ -20,6 +20,7 @@ if (platform.system() == 'Linux'):
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+APPEND_SLASH = False 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -177,8 +178,7 @@ TIME_INTERVAL = 30
 
 NAMESPACE_FLAG = 'flag'
 
-DEFAULT_HTML = '<html><body><style>div { height: 60vh; background: #f1f1f1; border-radius: 12px; padding: 120px 30px; box-sizing: border-box; text-align: center; display: flex; justify-content: center; align-items: center; margin-bottom: 24px; }</style><div>这是默认的PDF模版。</div><div>This is the default PDF template.</div></body></html>'
-
+DEFAULT_HTML = '<html><body><style> div { height: 60vh; background: #f1f1f1; border-radius: 12px; padding: 120px 30px; box-sizing: border-box; text-align: center; margin-bottom: 24px; width: 100%; }</style><div>这是默认的PDF模版。</div><div>This is the default PDF template.</div></body></html>'
 # Cors Header 跨域
 
 CORS_ALLOW_CREDENTIALS = True

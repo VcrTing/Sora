@@ -6,11 +6,13 @@ from django.http import HttpResponsePermanentRedirect, HttpResponse, JsonRespons
 
 from datetime import datetime
 import os, json, uuid, time, random
+from urllib import request as urllib2
 from PIL import Image
 
+from django.template.loader import render_to_string
 from xhtml2pdf import pisa
 
-from .TOOL.printed import pdf_print_by_link, pdf_print_by_html
+from .TOOL.printed import pdf_print_by_link, pdf_print_by_html, do_print
 from .TOOL.trashed import pdf_trash
 
 from forpdf.settings import MEDIA_DIR, BASE_DIR, TIME_INTERVAL, PDF_DIR, DEFAULT_HTML, NAMESPACE_FLAG
@@ -57,6 +59,28 @@ class PdfLinkView(View):
         pdf_trash()
         return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
 
+from django.template import Context, Template
+
+def extract_request_variables(request):
+
+    page_size = request.POST.get('page_size', 'letter')
+    page_orientation = request.POST.get('page_orientation', 'portrait')
+
+    pagesize = "%s %s" % (
+        page_size, page_orientation
+    )
+
+    template = Template(request.POST.get('data', ''))
+    data = template.render(Context({}))
+    return {
+        'pagesize': pagesize,
+        'data': data,
+        'page_orientation': page_orientation,
+        'page_size': page_size,
+        'example_number': request.POST.get("example_number", '1'),
+        'border': request.POST.get('border', '')
+    }
+
 # 根据 HTML 转为 PDF
 class PdfHtmlView(View):
     def get(self, request):
@@ -73,13 +97,13 @@ class PdfHtmlView(View):
 
     def post(self, request):
         
-        html = request.POST.get('html', 'Nothing')
-        mode = request.POST.get('method', 'sponse')
+        option = request.GET.get('option', 'cmd')
+        
+        res = None
+        html = request.POST.get('html', DEFAULT_HTML)
 
-        res = pdf_print_by_html(request, html)
-        html_file = res[0: -3] + 'html'
-
-        if mode == 'sponse':
+        if option == 'simple':
+            # named, res = pdf_print_by_html(request, html)
 
             response = HttpResponse(content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="report.pdf"'
@@ -87,17 +111,16 @@ class PdfHtmlView(View):
             pisa.CreatePDF(html, dest = response)
             return response
         else:
-            pisa.CreatePDF(html, res)
-            return JsonResponse({ 'status': True, 'pdf': res, 'html': html_file }, safe = False)
-        """
 
-        domain = self.get_domain(request)
-        res = domain + '/' + res
-        html = res[0: -3] + 'html'
-        
-        pdf_trash()
-        return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
-        """
+            domain = self.get_domain(request)
+            named, res = pdf_print_by_html(request, html)
+
+            do_print(named)
+            res = domain + '/' + res
+            html = res[0: -3] + 'html'
+            
+            pdf_trash()
+            return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
 
 
 

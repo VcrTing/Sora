@@ -29,9 +29,9 @@ def pdf_print_by_html(request, html):
     named = os.path.join( '.', PDF_DIR, n)
     print('named =', named)
     html = _html_content(request, html)
-    print('html =', str(html)[0: 20])
 
     _file(named, html)
-    print('HTML 写入成功。')
-    # _cmd('HTML', named)
-    return _download(n)
+    return named, _download(n)
+
+def do_print(named):
+    _cmd('HTML', named)
