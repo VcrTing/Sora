@@ -32,6 +32,13 @@ yum install -y libXext libjpeg xorg-x11-fonts-75dpi xorg-x11-fonts-Type1
 wkhtmltopdf https://www.baidu.com baidu.pdf
 
 
+## 安装 Pandoc
+sudo yum -y install stack
+sudo yum install zlib-devel
+git clone https://github.com/jgm/pandoc
+cd pandoc
+
+
 ## 安装中文字体
 fc-list  :lang=zh
 

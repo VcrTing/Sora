@@ -5,7 +5,7 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponsePermanentRedirect, HttpResponse, JsonResponse
 
 from datetime import datetime
-import os, json, uuid, time, random
+import os, json, uuid, time, random, pdfkit
 from urllib import request as urllib2
 from PIL import Image
 
@@ -100,6 +100,7 @@ class PdfHtmlView(View):
         option = request.GET.get('option', 'cmd')
         
         res = None
+        domain = self.get_domain(request)
         html = request.POST.get('html', DEFAULT_HTML)
 
         if option == 'simple':
@@ -110,9 +111,18 @@ class PdfHtmlView(View):
             
             pisa.CreatePDF(html, dest = response)
             return response
+
+        elif option == 'pdfkit':
+            named, res = pdf_print_by_html(request, html)
+            
+            with open(named + '.html') as f:
+                pdfkit.from_file(f, (named + '.pdf'))
+
+            res = domain + '/' + res
+            html = res[0: -3] + 'html'
+            return JsonResponse({ 'status': True, 'pdf': res, 'html': html }, safe = False)
         else:
 
-            domain = self.get_domain(request)
             named, res = pdf_print_by_html(request, html)
 
             do_print(named)
