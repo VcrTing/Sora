@@ -5,6 +5,8 @@ from .func.osed import path
 from .func.trash import trash_old
 from .func.model import get_back_conf, save_path, dir_name, save_back_result
 
+from .email.send import content, send_mail
+
 from forpdf.settings import BACK_ROOT
 
 from .func.scp import scp_file, create_scp_cmd
@@ -30,6 +32,7 @@ def _running_cp(c, sv_path):
     return status
 
 def working():
+    res = [ ]
 
     print('开始执行备份，路径 =', BACK_ROOT)
     # 总文件夹是否存在
@@ -59,3 +62,12 @@ def working():
 
                 # 保存
                 save_back_result(status, sv_path, c)
+
+                # 成功状态
+                if status:
+                    res.append( named )
+
+    # 发送邮件
+    print('结果 res =', res)
+    msg = content(res)
+    res = send_mail('SMSTask 备份情况反馈', msg)
