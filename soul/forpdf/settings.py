@@ -165,7 +165,7 @@ BACK_ROOT = os.path.join(
     'BACK_FILES_IMPORTANT'
 )
 
-BACK_INTERVAL = 1
+BACK_INTERVAL = 24*4
 
 BACK_WORK_HOUR = [ 13, 21 ] # [ 13, 21]
 
