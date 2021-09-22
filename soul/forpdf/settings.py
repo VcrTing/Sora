@@ -167,7 +167,7 @@ BACK_ROOT = os.path.join(
 
 BACK_INTERVAL = 1
 
-BACK_WORK_HOUR = [ 13, 16, 21 ] # [ 13, 21]
+BACK_WORK_HOUR = [ 13, 21 ] # [ 13, 21]
 
 # 后台
 PDF_DIR = 'save'

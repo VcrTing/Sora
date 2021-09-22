@@ -8,7 +8,7 @@ conf = {
     'add': 'smtp.163.com',
     'mime': 'vcrting@163.com',
     'idcan': 'vcrting@163.com',
-    'idgon': 'YWAZVLLPSPJASFIT',
+    'idgon': '',
     'gotter': [
         'support@manfulls.com' 
     ]
