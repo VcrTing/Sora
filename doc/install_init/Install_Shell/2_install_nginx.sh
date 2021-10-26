@@ -13,6 +13,7 @@ echo '安装 完成'
 echo '正在更改 配置文件'
 rm -rf /etc/nginx/nginx.conf
 cp ./SAVE/nginx.conf /etc/nginx/nginx.conf
+rm -rf /etc/nginx/sites-available/default 
 echo '完成文件 配置'
 echo ''
 echo '<======================'

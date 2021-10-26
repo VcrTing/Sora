@@ -27,7 +27,6 @@ def pdf_print_by_link(request, link, static):
 def pdf_print_by_html(request, html):
     n = _name(request)
     named = os.path.join( '.', PDF_DIR, n)
-    print('named =', named)
     html = _html_content(request, html)
 
     _file(named, html)

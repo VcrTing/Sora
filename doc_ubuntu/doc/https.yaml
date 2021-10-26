@@ -1,0 +1,37 @@
+blog:
+https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx
+
+条件:
+  确保nginx 配置了 server name 是 域名
+
+0:
+lsb_release -a
+
+1:
+sudo apt-get install -y epel-release
+
+2:
+sudo apt-get install -y snapd
+
+3:
+sudo snap install core
+
+4:
+sudo snap refresh core
+
+5:
+sudo apt-get remove -y certbot
+  # sudo dnf remove certbot
+  # sudo yum remove certbot.
+
+6:
+sudo snap install --classic certbot
+
+7:
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+8:
+sudo certbot --nginx
+
+9:
+certbot install --cert-name pdf01.svr.up5d.com

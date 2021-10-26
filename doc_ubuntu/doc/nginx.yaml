@@ -1,0 +1,12 @@
+
+查看状态:
+sudo systemctl status nginx.service
+ 
+开启 nginx 服务:
+sudo systemctl start nginx.service
+ 
+重启服务:
+sudo systemctl restart nginx.service
+ 
+查看所有服务:
+sudo systemctl list-units --type=service

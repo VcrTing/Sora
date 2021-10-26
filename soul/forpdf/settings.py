@@ -174,7 +174,7 @@ PDF_DIR = 'save'
 
 PDF_FILE_ROOT = os.path.join(BASE_DIR, PDF_DIR)
 
-TIME_INTERVAL = 30
+TIME_INTERVAL = 30*60
 
 NAMESPACE_FLAG = 'flag'
 
