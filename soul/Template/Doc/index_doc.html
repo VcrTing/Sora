@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block data %}
+    <div class="container">
+        <div class="row row_char">
+            <h2>
+                PDF 使用 文档
+            </h2>
+        </div>
+
+        <div class="row row_char">
+            <h4>
+                POST 方法
+            </h4>
+
+            <p>
+                请使用 POST 方法连接下方 链接
+            </p>
+
+            <p class="url">
+                {{ request.get_host }}/pdf/html_content/?option=NORMAL
+            </p>
+        </div>
+
+        <div class="row row_char">
+            <h4>
+                传入参数
+            </h4>
+            <p>
+                { 'html': YOUR_HTML_CONTENT }
+            </p>
+            <p>
+                请传入 HTML 内容
+            </p>
+        </div>
+
+        <div class="row row_char">
+            <h4>
+                返回值 [response]
+            </h4>
+            <p>
+{<br/>
+    "status": true,<br/>
+    "pdf": "{{ request.get_host }}/file/default_20211026172112_173_3524_PDF.pdf",<br/>
+    "html": "{{ request.get_host }}/file/default_20211026172112_173_3524_PDF.html"<br/>
+}<br/>             
+            </p>
+            <p>
+                pdf 值 即 PDF 文件
+            </p>
+        </div>
+
+        <div class="row row_char">
+            <h4>
+                关于中文
+            </h4>
+            <p>
+                自带“微软雅黑”中文字体。
+            </p>
+        </div>
+    </div>
+{% endblock data %}

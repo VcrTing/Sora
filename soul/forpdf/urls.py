@@ -19,6 +19,7 @@ from django.conf.urls import static
 from django.views.static import serve
 
 from Appis.web.views import WebView, PdfLinkView, PdfHtmlView
+from Appis.web.views_doc import DocView
 
 from Appis.user.views import VueView
 
@@ -26,6 +27,9 @@ from . import settings
 
 urlpatterns = [
     path('', VueView.as_view()),
+
+    path('pdf/doc/', DocView.as_view()),
+
     path('admin/', admin.site.urls),
     path('pdf/test/', WebView.as_view()),
     path('pdf/link/', PdfLinkView.as_view()),
